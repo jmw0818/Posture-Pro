@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop File Upload</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .drag-drop-area {
+            border: 2px dashed #007bff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            color: #007bff;
+            transition: background-color 0.3s ease;
+        }
+        .drag-drop-area.dragover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body mb-6">
+                <div class="input-group md-2">
+                    <form id="upload-form" action="{% url 'posture:video' %}" method="POST" enctype="multipart/form-data">
+                        <div id="drag-drop-area" class="drag-drop-area">
+                            Drag & Drop your file here or click to upload
+                            <input type="file" id="file-input inputGroupFile02" name="document" class="form-control-file d-none">
+                        </div>
+                        {% csrf_token %}
+                        <input class="btn btn-primary mt-3" type="submit" value="Upload">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var dragDropArea = document.getElementById('drag-drop-area');
+            var fileInput = document.getElementById('file-input');
+
+            dragDropArea.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function(event) {
+                handleFiles(event.target.files);
+            });
+
+            dragDropArea.addEventListener('dragover', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                dragDropArea.classList.add('dragover');
+            });
+
+            dragDropArea.addEventListener('dragleave', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                dragDropArea.classList.remove('dragover');
+            });
+
+            dragDropArea.addEventListener('drop', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                dragDropArea.classList.remove('dragover');
+                handleFiles(event.dataTransfer.files);
+            });
+
+            function handleFiles(files) {
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    dragDropArea.textContent = files[0].name;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

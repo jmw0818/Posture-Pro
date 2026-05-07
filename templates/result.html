@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Posture Pro</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/img/logo.png' %}" />
+
+  <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+ 
+</head>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+.custom-feedback {
+    font-size: 1.1rem !important; /* 폰트 크기 조정 */
+    color: #495057 !important; /* 색상 변경 */
+    font-weight: 400 !important; /* 폰트 두께 조정 */
+    text-align: center !important;
+    line-height: 1.6 !important; /* 줄 간격 조정 */
+    padding: 15px !important; /* 여백 추가 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    background-color:  #f1f3f5; /* 부드러운 배경색 */
+    border: 1px solid #e0e0e0; /* 경계선 추가 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    font-family: 'Roboto', sans-serif; /* 새로운 폰트 적용 */
+}
+
+.feedback-icon {
+    transition: transform 0.3s ease;
+    color: #007bff; /* 아이콘 색상 변경 */
+    margin-bottom: 10px; /* 아이콘과 텍스트 간 여백 */
+}
+
+.feedback-icon:hover {
+    transform: scale(1.2); /* 호버 시 아이콘 크기 증가 */
+}
+
+</style>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed" >
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="main" class="text-nowrap logo-img">
+            <img src="{% static 'assets/img/logo.png' %}" width="140" alt="" /><h2>Posture Pro</h2>
+            
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse" data-aos='zoom-in'>
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="\">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Home</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="main" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                <span class="hide-menu">메인화면</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">운동종류</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="lunge" aria-expanded="false">
+                <span class="hide-menu">Lunge</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="flank" aria-expanded="false">
+              
+                <span class="hide-menu">Flank</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="squat" aria-expanded="false">
+                
+                <span class="hide-menu">Squat</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="pullup" aria-expanded="false">
+             
+                <span class="hide-menu">Pull Up</span>
+              </a>
+            </li>
+            
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">회원정보</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="login" aria-expanded="false">
+                <span>
+                  <i class="ti ti-login"></i>
+                </span>
+                <span class="hide-menu">로그아웃</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="register" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user-plus"></i>
+                </span>
+                <span class="hide-menu">운동기록</span>
+              </a>
+            </li>
+          </ul>
+          
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                  
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="login" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <div class="container-fluid">
+        <div class="container-fluid px-0">
+          <div class="card">
+            
+            <div class="card-body">
+              <h5 class="card-title mb-9 fw-semibold text-center">{{ request.session.username }}님의 분석결과</h5>
+              <div class="row">
+                <div class="col-md-8" data-aos="fade-down" data-aos-delay="100">
+                  <div class="card">
+                    <ul>
+                      {% for video in videos %} 
+                      <li>
+                        <video width="100%" height="100%" controls>
+                          <source src="{{ video.document.url }}" type="video/mp4">
+                        </video>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <!-- Yearly Breakup -->
+                    <div class="card overflow-hidden">
+                      <div class="card-body p-8 mt-4">
+                        <h5 class="card-title  mb-9 fw-semibold">{{ request.session.username }}님의 점수:</h5>
+                        <div class="row align-items-center">
+      
+                            <h4 class="fw-semibold text-center mb-3">{{ rank_value|floatformat:0 }}점</h4>
+
+                            <div class="d-flex align-items-center ">
+                              <div class="me-4">
+                                <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                                <span class="fs-2">총점</span>
+                              </div>
+                              <div>
+                                <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                                <span class="fs-2">감점</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="d-flex text-center justify-content-center">
+                              <div id="breakup"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12" data-aos="fade-up">
+                      <div class="card">
+                          <h5 class="card-title fw-semibold text-center">피드백</h5>
+                          <div class="card-body text-center custom-feedback">
+                              <div class="feedback-icon" style="font-size: 3rem;">
+                                  <i class="ti ti-message-square"></i>
+                              </div>
+                              <p style="padding: 5px;">
+                                  <b>{{ csv_text|linebreaks }}</b>
+                              </p>                        
+                          </div>
+                      </div>
+                  </div>
+                
+                
+                    
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static '/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/sidebarmenu.js' %}"></script>
+  <script src="{% static 'assets/js/app.min.js' %}"></script>
+  <script src="{% static 'assets/libs/simplebar/dist/simplebar.js' %}"></script>
+  <script src="{% static 'assets/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+ 
+  <script>
+    $(function () {
+        // Breakup
+        // =====================================
+        var rankValue = parseInt("{{ rank_value|default_if_none:"0" }}"); // Django에서 전달된 rank_value 값
+
+        var breakup = {
+            color: "#adb5bd",
+            series: [rankValue, 100-rankValue], // rankValue를 정수로 변환하여 사용
+            labels: ["총점", "감점"],
+            chart: {
+                width: 180,
+                type: "donut",
+                fontFamily: "Plus Jakarta Sans', sans-serif",
+                foreColor: "#adb0bb",
+            },
+            plotOptions: {
+                pie: {
+                    startAngle: 0,
+                    endAngle: 360,
+                    donut: {
+                        size: '75%',
+                    },
+                },
+            },
+            stroke: {
+                show: false,
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+                show: false,
+            },
+            colors: ["#5D87FF", "#F9F9FD"],
+            responsive: [
+                {
+                    breakpoint: 991,
+                    options: {
+                        chart: {
+                            width: 150,
+                        },
+                    },
+                },
+            ],
+            tooltip: {
+                theme: "dark",
+                fillSeriesColor: false,
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+        chart.render();
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  AOS.init({
+    duration: 1200,  // 애니메이션 지속 시간
+  });
+</script>
+</body>
+
+</html>

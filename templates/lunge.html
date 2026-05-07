@@ -1,0 +1,395 @@
+﻿<!doctype html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Posture Pro</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/imglogo.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}" />
+
+  <style>
+    #drag-drop-area {
+        border: 2px dashed #adb5bd; /* 테두리 색상 설정 */
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    #drag-drop-area.dragover {
+        background-color: #adb5bd;
+    }
+    .file-name {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    #progress-container {
+        margin-top: 20px;
+        display: none;
+    }
+    #progress-bar {
+        width: 100%;
+    }
+</style>
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed" >
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="main" class="text-nowrap logo-img">
+            <img src="{% static 'assets/img/logo.png' %}" width="140" alt="" /><h2>Posture Pro</h2>
+            
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse" data-aos='zoom-in'>
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="\">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Home</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="main" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                <span class="hide-menu">메인화면</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">운동종류</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="lunge" aria-expanded="false">
+                <span class="hide-menu">Lunge</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="flank" aria-expanded="false">
+              
+                <span class="hide-menu">Flank</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="squat" aria-expanded="false">
+                
+                <span class="hide-menu">Squat</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="pullup" aria-expanded="false">
+             
+                <span class="hide-menu">Pull Up</span>
+              </a>
+            </li>
+            
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">회원정보</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="login" aria-expanded="false">
+                <span>
+                  <i class="ti ti-login"></i>
+                </span>
+                <span class="hide-menu">로그아웃</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="register" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user-plus"></i>
+                </span>
+                <span class="hide-menu">운동기록</span>
+              </a>
+            </li>
+          </ul>
+          
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="login" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <div class="container-fluid">
+        <div class="container-fluid px-0">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="card-title fw-semibold mb-4 text-center">Lunge</h5>
+                  <div class="card">
+                    <img src="{% static 'assets/img/lunge.png' %}" class="card-img-top" style="width:89%; height:89%" alt="...">
+              
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h5 class="card-title fw-semibold mb-4 text-center">자세 상세</h5>
+                  <div class="card">
+              
+                    <div class="card-body">
+                      
+                      <p class="card-text">1.두 발은 골반 넓이 정도로 열어두고 코어에 힘을 준 자세로 허리를 펴주세요.
+                        <br>
+                      2. 그 상태에서 한 쪽 다리를 보폭만큼 앞으로 내밀어주세요.
+                      <br>
+                      3. 골반은 중립을 유지한 상태에서 숨을 크게 들이마시고 내쉬는 숨에 내려가주세요.
+                      <br>
+                      4. 앞쪽에 있는 다리 고관절이 접히고 얖쪽 슬관절이 무릎에 동시에 접히면서 내려가주세요.
+                      <br>
+                      5. 상체는 서있는 자세와 동일하게 그대로 수직으로 내려갔다가 두발로 바닥을 밀어서 올라와 주세요.
+                      <br>
+                      6. 반대쪽 다리도 똑같이 진행해주세요.
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <h5 class = "text-center">주의사항</h5>
+                      1.스트레칭을 먼저 수행해주세요
+                      <br>
+                      2. 골반은 항상 정면을 향해주세요
+                      <br>
+                      3. 최대한 뒤쪽 다리의 힘을 빼고 앞쪽 다리에 무게를 실어주세요
+                      <br>
+                      4. 발끝 방향과 무릎 방향이 일치해야 무릎 부상을 최소화 할 수 있습니다
+                      <br>
+                      5. 다리를 앞뒤로 충분히 편한 정도로만 벌려주세요</p>
+                    
+                    </div>
+                  </div>
+                </div>
+                
+                  <h5 class="card-title fw-semibold mb-6 text-center">자세 확인받기</h5>
+                  <div class="card">
+                    <div class="card-body ">
+                      <form id="upload-form" action="{% url 'posture:lunge_video' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div id="drag-drop-area" class="drag-drop-area border rounded p-5 text-center">
+                            <label for="file-input" class="form-label">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                                <p id="upload-text" class="mb-0">Drag  & Drop </p>
+                                <div class="file-name d-none" id="file-name"></div> 
+                            </label>
+                            <input type="file" id="file-input" name="document"  accept=".mp4" class="form-control-file d-none">
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="row justify-content-center"> <!-- 업로드 버튼을 가운데 정렬하기 위해 부트스트랩 그리드 사용 -->
+                                <div class="col-md-0"> <!-- 컬럼을 사용하여 업로드 버튼을 가운데 정렬 -->
+                                    <button id="uploadButton" class="btn btn-primary mt-0 btn-block">Upload</button> <!-- btn-block 클래스를 추가하여 버튼을 가로 전체로 확장 -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- 프로그레스 바 -->
+                    <div id="progress-container">
+                      <label for="progress-bar">Progress:</label>
+                      <progress id="progress-bar" value="0" max="100"></progress>
+                      <span id="progress-text">0%</span>
+                  </div>
+                </div>
+            </div>
+        </div>
+              
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static '/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/sidebarmenu.js' %}"></script>
+  <script src="{% static 'assets/js/app.min.js' %}"></script>
+  <script src="{% static 'assets/libs/simplebar/dist/simplebar.js' %}"></script>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dragDropArea = document.getElementById('drag-drop-area');
+        var fileInput = document.getElementById('file-input');
+        var fileNameDisplay = document.getElementById('file-name');
+        var progressContainer = document.getElementById('progress-container');
+        var progressBar = document.getElementById('progress-bar');
+        var progressText = document.getElementById('progress-text');
+        var uploadButton = document.getElementById('uploadButton');
+        var fileSelected = false;
+
+        dragDropArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        uploadButton.addEventListener('click', function() {
+          if (fileSelected) {
+              var files = fileInput.files;
+              if (files.length > 0) {
+                  var file = files[0];
+                  var fileName = file.name.toLowerCase();
+                  if (fileName.endsWith('.mp4')) {
+                      handleFiles(files);
+                  } else {
+                      alert('.mp4 확장자를 가진 MP4 형식의 비디오 파일만 업로드할 수 있습니다.');
+                  }
+              } else {
+                  alert('파일을 선택하세요.');
+              }
+          } else {
+              alert('파일을 선택하세요.');
+          }
+      });
+      
+        fileInput.addEventListener('change', function(event) {
+            var selectedFile = event.target.files[0]; // 선택된 파일 객체 가져오기
+            if (selectedFile) {
+                var fileName = selectedFile.name.toLowerCase();
+                if (fileName.endsWith('.mp4')) {
+                    fileNameDisplay.textContent = selectedFile.name; // 파일 이름을 표시
+                    fileNameDisplay.classList.remove('d-none'); // 파일 이름이 표시되도록 클래스 제거
+                    fileSelected = true; // 파일 선택 상태 업데이트
+                } else {
+                    fileNameDisplay.textContent = ''; // 파일이 선택되지 않은 경우에는 파일 이름을 비웁니다.
+                    fileNameDisplay.classList.add('d-none'); // 파일 이름이 비어있으면 숨김 처리
+                    fileSelected = false; // 파일 선택 상태 업데이트
+                    alert('.mp4 확장자를 가진 MP4 형식의 비디오 파일을 선택하세요.');
+                }
+            }
+        });
+
+        dragDropArea.addEventListener('dragover', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            dragDropArea.classList.add('dragover');
+        });
+
+        dragDropArea.addEventListener('dragleave', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            dragDropArea.classList.remove('dragover');
+        });
+
+        dragDropArea.addEventListener('drop', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            dragDropArea.classList.remove('dragover');
+
+            var files = event.dataTransfer.files;
+            if (files.length > 0) {
+                var file = files[0];
+                var fileName = file.name.toLowerCase();
+                if (fileName.endsWith('.mp4')) {
+                    fileNameDisplay.textContent = file.name;
+                    fileNameDisplay.classList.remove('d-none'); // 파일 이름을 표시하기 위해 클래스 제거
+                    fileSelected = true; // 파일 선택 상태 업데이트
+
+                    // 드래그 앤 드롭한 파일을 fileInput에 설정
+                    var dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    fileInput.files = dataTransfer.files;
+                } else {
+                    alert('.mp4 확장자를 가진 MP4 형식의 비디오 파일을 업로드하세요.');
+                }
+            }
+        });
+
+        function handleFiles(files) {
+          if (files.length > 0) {
+              var fileName = files[0].name;
+              fileNameDisplay.textContent = fileName;
+      
+              progressContainer.style.display = 'block';
+      
+              // 파일 업로드가 시작되면 주기적으로 진행 상태를 가져옴
+              var interval = setInterval(async function() {
+                  try {
+                    const response = await fetch("/media/progress.json?t=" + new Date().getTime());
+
+                      if (response.ok) {
+                          const data = await response.json();
+                          const progress = data.progress;
+      
+                          // 프로그레스 바와 텍스트 업데이트
+                          progressBar.value = progress;
+                          progressText.textContent = progress.toFixed(2) + '%';
+      
+                          // 진행률이 100%에 도달하면 완료 처리
+                          if (progress >= 100) {
+                              clearInterval(interval);  // 반복 중지
+                              window.location.href = 'events';  // 완료 후 페이지 이동
+                          }
+                      } else {
+                          console.error("진행 상태를 가져오는 데 실패했습니다:", response.statusText);
+                      }
+                  } catch (error) {
+                      console.error("진행 상태를 가져오는 중 오류가 발생했습니다:", error);
+                  }
+              }, 2000);  // 2초마다 fetch 진행 상태 확인
+          }
+      }
+      
+    });
+</script>
+</body>
+</body>
+
+</html>

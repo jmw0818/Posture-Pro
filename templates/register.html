@@ -1,0 +1,102 @@
+﻿<!doctype html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Posture Pro</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/img/logo.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}" />
+  
+</head>
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="main" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="{% static 'assets/img/logo.png' %}" width="180" alt="">
+                </a>
+                <p class="text-center">Posture Pro</p>
+                <form action="{% url 'posture:register' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label">Name</label>
+                    <input class="form-control" id="username" type="text" name="username" required>
+                    <div id="usernameFeedback" class="invalid-feedback">ID가 중복됩니다.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" required>
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                    <input class="form-control" id="password2" name="password2" type="password" required>
+                    <div id="passwordFeedback" class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">등록</button>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                    <a class="text-primary fw-bold ms-2" href="login">Sign In</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script>
+    $(document).ready(function() {
+      $('#username').on('input', function() {
+        var username = $(this).val();
+        if (username.length > 0) {
+          $.ajax({
+            url: '{% url "posture:check_username" %}',
+            data: {
+              'username': username
+            },
+            dataType: 'json',
+            success: function(data) {
+              if (data.exists) {
+                $('#username').addClass('is-invalid');
+                $('#usernameFeedback').show();
+              } else {
+                $('#username').removeClass('is-invalid');
+                $('#usernameFeedback').hide();
+              }
+            }
+          });
+        } else {
+          $('#username').removeClass('is-invalid');
+          $('#usernameFeedback').hide();
+        }
+      });
+
+      $('#password, #password2').on('input', function() {
+        var password = $('#password').val();
+        var password2 = $('#password2').val();
+        if (password !== password2) {
+          $('#password2').addClass('is-invalid');
+          $('#passwordFeedback').show();
+        } else {
+          $('#password2').removeClass('is-invalid');
+          $('#passwordFeedback').hide();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
